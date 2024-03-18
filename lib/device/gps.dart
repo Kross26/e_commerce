@@ -1,0 +1,1 @@
+// clases, metodos y componentes que accedan funcionalidades nativas del dispositivo
