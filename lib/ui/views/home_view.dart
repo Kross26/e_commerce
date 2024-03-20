@@ -1,7 +1,9 @@
-import 'dart:convert';
-import 'package:e_commerce/services/api_service.dart';
+import 'package:e_commerce/domain/entities/product_detail.dart';
+import 'package:e_commerce/services/api_helper.dart';
+import 'package:e_commerce/ui/widgets/product_card_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter/widgets.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -10,30 +12,22 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
+// funcion que obtiene datos de la API y los convierte en una lista de objetos.
 class _HomeViewState extends State<HomeView> {
-  Future<List> _getProduct() async {
-    var url = Uri.parse(productUrl);
-    final response = await http.get(url);
-    final data = jsonDecode(response.body);
-    return data;
-  }
+  late Future<List<ProductDetail>> _productFuture;
 
   @override
   void initState() {
-    _getProduct();
+    _productFuture = ApiHelper.getProduct(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // mediaquerys
-    // double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
-    // final double pixelRatio = MediaQuery.of(context).devicePixelRatio;
     return Scaffold(
         backgroundColor: Colors.white,
-        body: FutureBuilder<List>(
-          future: _getProduct(),
+        body: FutureBuilder<List<ProductDetail>>(
+          future: _productFuture,
           builder: (context, snapshot) {
             // connect to the internet
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -52,62 +46,65 @@ class _HomeViewState extends State<HomeView> {
                 child: Text("Data Empty"),
               );
             }
-            return GridView.builder(
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                final product = snapshot.data![index];
-
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 0),
-                  child: Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: screenHeight * 0.12,
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
+            return Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide.none,
                             ),
-                            child: Image.network(
-                              product['image'],
+                            filled: true,
+                            hintText: "Seach product",
+                            fillColor: Colors.grey[200],
+                            hintStyle: TextStyle(
+                              color: Colors.grey[800],
                             ),
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "${product['title']}",
-                            // style: TextStyle(fontSize: 5 * MediaQuery.of(context).devicePixelRatio),
-                            maxLines: 2,
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("\$${product['price']}"),
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.favorite_border_rounded),
-                              ),
-                            ],
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          height: 60,
+                          width: 50,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.grey[200]),
+                          child: Icon(Icons.filter_list),
+                        ),
+                      )
+                    ],
                   ),
-                );
-              },
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.9,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-              ),
+                ),
+                Expanded(
+                  child: GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.9,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 0,
+                    ),
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) {
+                      final product = snapshot.data![index];
+                      // widget reusable
+                      return ProductCardReusable(
+                        product: product,
+                      );
+                    },
+                  ),
+                )
+              ],
             );
           },
         ));
