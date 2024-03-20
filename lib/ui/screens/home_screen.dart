@@ -16,20 +16,21 @@ class _HomeScreenState extends State<HomeScreen> {
   // indice actual, que se muestra en el navbar
   int currentIndex = 0;
   // lista de strings, que se muestran en el titulo de las diferentes views
-  List<String> pageNames = ['Home', 'Search', 'Profile'];
+  List<String> pageNames = ['Home', 'Cart', 'Profile'];
 
 // consts defined
   @override
   Widget build(BuildContext context) {
     final screens = [
       const HomeView(),
-      const SearchView(),
+      const CartView(),
       const ProfileView(),
     ];
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey[300],
+        elevation: 0,
+        backgroundColor: Colors.white,
         title: Text(pageNames[
             currentIndex]), // segun el indice actual, muestra los titulos correspondientes
       ),
@@ -40,8 +41,11 @@ class _HomeScreenState extends State<HomeScreen> {
       // nav bar with 3 seccion
       bottomNavigationBar: NavigationBar(
         destinations: const [
-          NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-          NavigationDestination(icon: Icon(Icons.search), label: 'Search'),
+          NavigationDestination(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          NavigationDestination(icon: Icon(Icons.shopping_cart), label: 'Cart'),
           NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
         ],
         indicatorColor: Colors.white,
