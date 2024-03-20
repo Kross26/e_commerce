@@ -6,7 +6,7 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[300],
+        backgroundColor: Colors.white,
         body: Padding(
           padding: const EdgeInsets.only(top: 30),
           child: Center(
@@ -14,7 +14,7 @@ class ProfileView extends StatelessWidget {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    color: Colors.grey[300],
+                    color: Colors.white,
                   ),
                   child: const CircleAvatar(
                     radius: 60,
