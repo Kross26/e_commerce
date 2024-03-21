@@ -1,7 +1,5 @@
 import 'package:e_commerce/domain/entities/product_detail.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   const ProductDetailScreen({super.key, required this.product});
@@ -10,8 +8,6 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final query = MediaQuery.of(context);
-    double screenHeight = MediaQuery.of(context).size.height;
     double screenWidht = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -51,7 +47,7 @@ class ProductDetailScreen extends StatelessWidget {
                       fontSize: screenWidht * 0.04,
                     ),
                   ),
-                  SizedBox(height: 3),
+                  const SizedBox(height: 3),
                   Text(
                     "\$${product.price}",
                     style: TextStyle(
@@ -59,7 +55,7 @@ class ProductDetailScreen extends StatelessWidget {
                       fontSize: screenWidht * 0.03,
                     ),
                   ),
-                  SizedBox(height: 3),
+                  const SizedBox(height: 3),
                   Text(
                     "${product.description}",
                     style: TextStyle(
