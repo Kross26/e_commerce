@@ -1,8 +1,6 @@
 import 'package:e_commerce/domain/entities/product_detail.dart';
 import 'package:e_commerce/ui/screens/product_detail_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class ProductCardReusable extends StatelessWidget {
   const ProductCardReusable({
@@ -14,7 +12,6 @@ class ProductCardReusable extends StatelessWidget {
 //todo hacer tamaño responisvooo
   @override
   Widget build(BuildContext context) {
-    final query = MediaQuery.of(context);
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidht = MediaQuery.of(context).size.width;
 

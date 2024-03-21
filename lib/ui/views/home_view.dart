@@ -1,9 +1,7 @@
 import 'package:e_commerce/domain/entities/product_detail.dart';
 import 'package:e_commerce/services/api_helper.dart';
 import 'package:e_commerce/ui/widgets/product_card_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -15,10 +13,12 @@ class HomeView extends StatefulWidget {
 // funcion que obtiene datos de la API y los convierte en una lista de objetos.
 class _HomeViewState extends State<HomeView> {
   late Future<List<ProductDetail>> _productFuture;
+  late Future<List<String>> _futureCategory;
 
   @override
   void initState() {
     _productFuture = ApiHelper.getProduct(context);
+    _futureCategory = ApiHelper.getProductCategory(context);
     super.initState();
   }
 
@@ -26,8 +26,8 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        body: FutureBuilder<List<ProductDetail>>(
-          future: _productFuture,
+        body: FutureBuilder<List>(
+          future: Future.wait([_productFuture, _futureCategory]),
           builder: (context, snapshot) {
             // connect to the internet
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -68,7 +68,7 @@ class _HomeViewState extends State<HomeView> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                       GestureDetector(
@@ -79,7 +79,7 @@ class _HomeViewState extends State<HomeView> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: Colors.grey[200]),
-                          child: Icon(Icons.filter_list),
+                          child: const Icon(Icons.filter_list),
                         ),
                       )
                     ],
@@ -96,7 +96,7 @@ class _HomeViewState extends State<HomeView> {
                     ),
                     itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) {
-                      final product = snapshot.data![index];
+                      final product = snapshot.data![0][index];
                       // widget reusable
                       return ProductCardReusable(
                         product: product,

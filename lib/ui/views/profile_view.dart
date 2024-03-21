@@ -13,7 +13,7 @@ class ProfileView extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.white,
                   ),
                   child: const CircleAvatar(
