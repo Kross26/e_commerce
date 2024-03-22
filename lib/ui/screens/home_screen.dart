@@ -33,12 +33,13 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.white,
         title: Text(pageNames[
             currentIndex]), // segun el indice actual, muestra los titulos correspondientes
+        surfaceTintColor: Colors.transparent,
       ),
       body: IndexedStack(
         index: currentIndex,
         children: screens,
       ),
-      // nav bar with 3 seccion
+      // nav bar with 3 seccions
       bottomNavigationBar: NavigationBar(
         destinations: const [
           NavigationDestination(
