@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_commerce/domain/entities/product_detail.dart';
 import 'package:e_commerce/ui/screens/product_detail_screen.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,6 @@ class ProductCardReusable extends StatelessWidget {
   });
 
   final ProductDetail product;
-//todo hacer tamaño responisvooo
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -34,21 +34,20 @@ class ProductCardReusable extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
+                CachedNetworkImage(
                   height: screenHeight * 0.10,
                   width: screenWidht * 0.18,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                  ),
-                  child: Image.network(
-                    product.image,
-                  ),
+                  imageUrl: product.image,
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      CircularProgressIndicator(
+                          value: downloadProgress.progress),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 Text(
-                  "${product.title}",
+                  product.title,
                   maxLines: 2,
                   style: TextStyle(
                     fontSize: screenWidht * 0.03,
