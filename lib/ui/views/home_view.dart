@@ -1,6 +1,4 @@
-import 'package:e_commerce/domain/entities/product_detail.dart';
-import 'package:e_commerce/services/api_helper.dart';
-import 'package:e_commerce/ui/widgets/product_card_widget.dart';
+import 'package:e_commerce/ui/screens.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
@@ -55,24 +53,27 @@ class _HomeViewState extends State<HomeView> {
                       Expanded(
                         child: TextField(
                           decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide.none,
-                            ),
-                            filled: true,
-                            hintText: "Seach product",
-                            fillColor: Colors.grey[200],
-                            hintStyle: TextStyle(
-                              color: Colors.grey[800],
-                            ),
-                          ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none,
+                              ),
+                              filled: true,
+                              hintText: "Seach product",
+                              fillColor: Colors.grey[200],
+                              hintStyle: TextStyle(
+                                color: Colors.grey[800],
+                              ),
+                              prefixIcon: Icon(
+                                Icons.search,
+                                color: Colors.grey[800],
+                              )),
                         ),
                       ),
                       const SizedBox(
                         width: 20,
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () => _show(context, snapshot.data![1]),
                         child: Container(
                           height: 60,
                           width: 50,
@@ -94,7 +95,7 @@ class _HomeViewState extends State<HomeView> {
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 0,
                     ),
-                    itemCount: snapshot.data!.length,
+                    itemCount: snapshot.data![0].length,
                     itemBuilder: (context, index) {
                       final product = snapshot.data![0][index];
                       // widget reusable
@@ -108,5 +109,31 @@ class _HomeViewState extends State<HomeView> {
             );
           },
         ));
+  }
+
+  void _show(BuildContext ctx, List<String> lstcategories) {
+    showModalBottomSheet(
+      elevation: 10,
+      context: ctx,
+      builder: (ctx) => Container(
+        alignment: Alignment.center,
+        child: ListView.builder(
+          itemCount: lstcategories.length,
+          itemBuilder: (context, index) {
+            String categoryName = lstcategories[index];
+            return ListTile(
+              onTap: () async {
+                _productFuture =
+                    ApiHelper.getProductbyCategory(context, categoryName);
+                setState(() {});
+                Navigator.pop(context);
+              },
+              leading: const Icon(Icons.category),
+              title: Text(lstcategories[index]),
+            );
+          },
+        ),
+      ),
+    );
   }
 }
