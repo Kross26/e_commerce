@@ -2,22 +2,21 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_commerce/ui/screens.dart';
 import 'package:flutter/material.dart';
 
-class ProductDetailScreen extends StatefulWidget {
+class ProductDetailScreen extends StatelessWidget {
   const ProductDetailScreen({super.key, required this.product});
 
   final ProductDetail product;
 
   @override
-  State<ProductDetailScreen> createState() => _ProductDetailScreenState();
-}
-
-class _ProductDetailScreenState extends State<ProductDetailScreen> {
-  @override
   Widget build(BuildContext context) {
     double screenWidht = MediaQuery.of(context).size.width;
     return Scaffold(
       //TODO AGREGAR FLOATINGACTIONBUTTON :::)))))
-      // CounterButton(icon: (Icons.add), onPressed: () {},),
+
+      floatingActionButton: CounterButton(
+        icon: Icons.add,
+        onPressed: () {},
+      ),
       backgroundColor: Colors.white,
       body: SafeArea(
         bottom: false,
@@ -36,7 +35,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             Expanded(
               child: CachedNetworkImage(
                 width: screenWidht * 0.9,
-                imageUrl: widget.product.image,
+                imageUrl: product.image,
                 progressIndicatorBuilder: (context, url, downloadProgress) =>
                     CircularProgressIndicator(value: downloadProgress.progress),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
@@ -57,7 +56,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 child: Column(
                   children: [
                     Text(
-                      widget.product.title,
+                      product.title,
                       maxLines: 2,
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
@@ -66,7 +65,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     ),
                     const SizedBox(height: 3),
                     Text(
-                      "\$${widget.product.price}",
+                      "\$${product.price}",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: screenWidht * 0.03,
@@ -74,7 +73,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     ),
                     const SizedBox(height: 3),
                     Text(
-                      widget.product.description,
+                      product.description,
                       style: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: screenWidht * 0.032,
