@@ -27,6 +27,10 @@ class ProductCardReusable extends StatelessWidget {
                       )));
         },
         child: Card(
+          shape: RoundedRectangleBorder(
+              side: BorderSide(color: Colors.grey.shade300, width: 2.0),
+              borderRadius: BorderRadius.circular(15.0)),
+          color: Colors.white,
           elevation: 0,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
