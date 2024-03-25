@@ -54,7 +54,7 @@ class _HomeViewState extends State<HomeView> {
                         child: TextField(
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(15),
                                 borderSide: BorderSide.none,
                               ),
                               filled: true,
@@ -75,10 +75,10 @@ class _HomeViewState extends State<HomeView> {
                       GestureDetector(
                         onTap: () => _show(context, snapshot.data![1]),
                         child: Container(
-                          height: 60,
+                          height: 50,
                           width: 50,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(15),
                               color: Colors.grey[200]),
                           child: const Icon(Icons.filter_list),
                         ),
