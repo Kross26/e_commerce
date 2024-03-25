@@ -16,14 +16,15 @@ class _HomeScreenState extends State<HomeScreen> {
   // indice actual, que se muestra en el navbar
   int currentIndex = 0;
   // lista de strings, que se muestran en el titulo de las diferentes views
-  List<String> pageNames = ['Home', 'Cart', 'Profile'];
+  List<String> pageNames = ['For You', 'My Cart', 'Profile'];
 
 // consts defined
   @override
   Widget build(BuildContext context) {
     final screens = [
       const HomeView(),
-      const CartView(),
+      //TODO
+      // const CartView(),
       const ProfileView(),
     ];
 
@@ -31,8 +32,11 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        title: Text(pageNames[
-            currentIndex]), // segun el indice actual, muestra los titulos correspondientes
+        title: Center(
+          child: Text(
+            pageNames[currentIndex],
+          ),
+        ), // segun el indice actual, muestra los titulos correspondientes
         surfaceTintColor: Colors.transparent,
       ),
       body: IndexedStack(
@@ -40,25 +44,33 @@ class _HomeScreenState extends State<HomeScreen> {
         children: screens,
       ),
       // nav bar with 3 seccions
-      bottomNavigationBar: NavigationBar(
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          NavigationDestination(icon: Icon(Icons.shopping_cart), label: 'Cart'),
-          NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
-        ],
-        indicatorColor: Colors.white,
-        backgroundColor: Colors.grey[300],
-        elevation: 0,
-        selectedIndex: currentIndex,
-        // se llama cuando se seleciona una nueva pagina y actualiza "currentIndex" mostrando el titulo correspondiente
-        onDestinationSelected: (int index) {
-          setState(() {
-            currentIndex = index;
-          });
-        },
+      bottomNavigationBar: Container(
+        clipBehavior: Clip.hardEdge,
+        decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+          topRight: Radius.circular(60),
+          topLeft: Radius.circular(60),
+        )),
+        child: NavigationBar(
+          destinations: const [
+            NavigationDestination(
+                icon: Icon(Icons.home_outlined), label: 'Home'),
+            NavigationDestination(
+                icon: Icon(Icons.shopping_cart_outlined), label: 'Cart'),
+            NavigationDestination(
+                icon: Icon(Icons.person_outline), label: 'Profile'),
+          ],
+          indicatorColor: Colors.white,
+          backgroundColor: Colors.grey[100],
+          // elevation: 0,
+          selectedIndex: currentIndex,
+          // se llama cuando se seleciona una nueva pagina y actualiza "currentIndex" mostrando el titulo correspondiente
+          onDestinationSelected: (int index) {
+            setState(() {
+              currentIndex = index;
+            });
+          },
+        ),
       ),
     );
   }
