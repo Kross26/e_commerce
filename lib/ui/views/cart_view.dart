@@ -1,12 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../screens.dart';
-
 class CartView extends StatelessWidget {
-  const CartView({super.key, required this.product});
-
-  final ProductDetail product;
+  const CartView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +13,7 @@ class CartView extends StatelessWidget {
           children: [
             CachedNetworkImage(
               width: screenWidht * 0.9,
-              imageUrl: product.image,
+              imageUrl: '',
               progressIndicatorBuilder: (context, url, downloadProgress) =>
                   CircularProgressIndicator(value: downloadProgress.progress),
               errorWidget: (context, url, error) => const Icon(Icons.error),
@@ -25,7 +21,7 @@ class CartView extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  "\$${product.title}",
+                  '',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: screenWidht * 0.03,

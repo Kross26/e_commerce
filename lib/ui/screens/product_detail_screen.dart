@@ -11,8 +11,6 @@ class ProductDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidht = MediaQuery.of(context).size.width;
     return Scaffold(
-      //TODO AGREGAR FLOATINGACTIONBUTTON :::)))))
-
       floatingActionButton: CounterButton(
         icon: Icons.add,
         onPressed: () {},

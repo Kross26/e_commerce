@@ -23,8 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final screens = [
       const HomeView(),
-      //TODO
-      // const CartView(),
+      const CartView(),
       const ProfileView(),
     ];
 
