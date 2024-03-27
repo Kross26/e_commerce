@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class CartView extends StatelessWidget {
+  static const String name = 'slider_screen';
   const CartView({super.key});
 
   @override
@@ -11,13 +12,13 @@ class CartView extends StatelessWidget {
         backgroundColor: Colors.white,
         body: Column(
           children: [
-            CachedNetworkImage(
-              width: screenWidht * 0.9,
-              imageUrl: '',
-              progressIndicatorBuilder: (context, url, downloadProgress) =>
-                  CircularProgressIndicator(value: downloadProgress.progress),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
-            ),
+            // CachedNetworkImage(
+            //   width: screenWidht * 0.9,
+            //   imageUrl: '',
+            //   progressIndicatorBuilder: (context, url, downloadProgress) =>
+            //       CircularProgressIndicator(value: downloadProgress.progress),
+            //   errorWidget: (context, url, error) => const Icon(Icons.error),
+            // ),
             Row(
               children: [
                 Text(
