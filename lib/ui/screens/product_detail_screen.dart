@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_commerce/ui/screens.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   const ProductDetailScreen({super.key, required this.product});
@@ -25,7 +26,9 @@ class ProductDetailScreen extends StatelessWidget {
               children: [
                 const BackButton(),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, CartView.name);
+                  },
                   icon: const Icon(Icons.shopping_bag_outlined),
                 ),
               ],
