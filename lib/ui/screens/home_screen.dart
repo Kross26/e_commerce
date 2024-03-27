@@ -29,46 +29,55 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        title: Center(
-          child: Text(
-            pageNames[currentIndex],
+          elevation: 0,
+          backgroundColor: Colors.white,
+          title: Center(
+            child: Text(
+              pageNames[currentIndex],
+            ),
           ),
-        ), // segun el indice actual, muestra los titulos correspondientes
-        surfaceTintColor: Colors.transparent,
-      ),
+          surfaceTintColor: Colors.transparent),
       body: IndexedStack(
         index: currentIndex,
         children: screens,
       ),
+      extendBody: true,
       // nav bar with 3 seccions
       bottomNavigationBar: Container(
         clipBehavior: Clip.hardEdge,
         decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
-          topRight: Radius.circular(60),
-          topLeft: Radius.circular(60),
-        )),
-        child: NavigationBar(
-          destinations: const [
-            NavigationDestination(
-                icon: Icon(Icons.home_outlined), label: 'Home'),
-            NavigationDestination(
-                icon: Icon(Icons.shopping_cart_outlined), label: 'Cart'),
-            NavigationDestination(
-                icon: Icon(Icons.person_outline), label: 'Profile'),
-          ],
-          indicatorColor: Colors.white,
-          backgroundColor: Colors.grey[100],
-          // elevation: 0,
-          selectedIndex: currentIndex,
-          // se llama cuando se seleciona una nueva pagina y actualiza "currentIndex" mostrando el titulo correspondiente
-          onDestinationSelected: (int index) {
-            setState(() {
-              currentIndex = index;
-            });
-          },
+              topRight: Radius.circular(60),
+              topLeft: Radius.circular(60),
+            ),
+            boxShadow: [
+              BoxShadow(color: Colors.grey, spreadRadius: 0, blurRadius: 5)
+            ]),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(60.0),
+            topRight: Radius.circular(60.0),
+          ),
+          child: NavigationBar(
+            destinations: const [
+              NavigationDestination(
+                  icon: Icon(Icons.home_outlined), label: 'Home'),
+              NavigationDestination(
+                  icon: Icon(Icons.shopping_cart_outlined), label: 'Cart'),
+              NavigationDestination(
+                  icon: Icon(Icons.person_outline), label: 'Profile'),
+            ],
+            indicatorColor: Colors.white,
+            backgroundColor: Colors.grey[100],
+            // elevation: 0,
+            selectedIndex: currentIndex,
+            // se llama cuando se seleciona una nueva pagina y actualiza "currentIndex" mostrando el titulo correspondiente
+            onDestinationSelected: (int index) {
+              setState(() {
+                currentIndex = index;
+              });
+            },
+          ),
         ),
       ),
     );
