@@ -1,3 +1,4 @@
+import 'package:e_commerce/ui/screens.dart';
 import 'package:flutter/material.dart';
 
 class CounterButton extends StatefulWidget {
@@ -14,7 +15,12 @@ class _CounterButtonState extends State<CounterButton> {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton.extended(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => CartView()),
+        );
+      },
       label: const Text('add to cart'),
       icon: const Icon(Icons.add),
     );
