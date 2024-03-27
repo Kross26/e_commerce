@@ -18,7 +18,7 @@ class _CounterButtonState extends State<CounterButton> {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => CartView()),
+          MaterialPageRoute(builder: (context) => const CartView()),
         );
       },
       label: const Text('add to cart'),
