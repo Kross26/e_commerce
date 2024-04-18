@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "818140880452",
+    "project_id": "auth-62848",
+    "storage_bucket": "auth-62848.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:818140880452:android:df76098c760d6ccd39e611",
+        "android_client_info": {
+          "package_name": "com.diegorios.ecommerceauthapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "818140880452-6pngosdbanit59s2vtqhemntle49f1rs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.diegorios.ecommerceauthapp",
+            "certificate_hash": "719cbbd9357efae86dee3101f80aa22448819f2c"
+          }
+        },
+        {
+          "client_id": "818140880452-1qcfs59021kq0lch95vvu2bafuujuian.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8WNHgtEPMCkuuiaNGSbDJHGJvY-BQPuk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "818140880452-1qcfs59021kq0lch95vvu2bafuujuian.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "818140880452-rs9tjp3e4f9pook333e88rlribgqq53o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.deliveryGo.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
