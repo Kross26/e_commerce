@@ -32,6 +32,7 @@ class ProductDetailScreen extends StatelessWidget {
                 ),
               ],
             ),
+            // cachednetworkimage package
             Expanded(
               child: CachedNetworkImage(
                 width: screenWidht * 0.9,
