@@ -23,50 +23,67 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        body: FutureBuilder<List>(
-          future: Future.wait([_productFuture, _futureCategory]),
-          builder: (context, snapshot) {
-            // connect to the internet
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            if (snapshot.data == null) {
-              return const Center(
-                child: Text("No Data"),
-              );
-            }
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidht = MediaQuery.of(context).size.width;
+    return Padding(
+      padding: const EdgeInsets.all(13.0),
+      child: Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            toolbarHeight: screenHeight * 0.1,
+            backgroundColor: Colors.white,
+            title: const Center(
+              child: Text('Home'),
+            ),
+            leading: const Icon(Icons.widgets_outlined),
+            actions: [
+              SizedBox(
+                  width: screenWidht * 0.12,
+                  child: const Icon(
+                    Icons.notifications_outlined,
+                  )),
+            ],
+          ),
+          body: FutureBuilder<List>(
+            future: Future.wait([_productFuture, _futureCategory]),
+            builder: (context, snapshot) {
+              // connect to the internet
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              if (snapshot.data == null) {
+                return const Center(
+                  child: Text("No Data"),
+                );
+              }
 
-            if (snapshot.data!.isEmpty) {
-              return const Center(
-                child: Text("Data Empty"),
-              );
-            }
-            return Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
+              if (snapshot.data!.isEmpty) {
+                return const Center(
+                  child: Text("Data Empty"),
+                );
+              }
+              return Column(
+                children: [
+                  Row(
                     children: [
                       Expanded(
                         child: TextField(
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
-                                borderSide: BorderSide.none,
+                                // borderSide: BorderSide(width: 30),
                               ),
                               filled: true,
                               hintText: "Seach product",
-                              fillColor: Colors.grey[200],
+                              fillColor: Colors.white,
                               hintStyle: TextStyle(
-                                color: Colors.grey[800],
+                                color: Colors.grey[500],
                               ),
                               prefixIcon: Icon(
                                 Icons.search,
-                                color: Colors.grey[800],
+                                color: Colors.grey[500],
                               )),
                         ),
                       ),
@@ -80,36 +97,40 @@ class _HomeViewState extends State<HomeView> {
                           width: 50,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
-                              color: Colors.grey[200]),
-                          child: const Icon(Icons.filter_list),
+                              color: Colors.black),
+                          child: const Icon(
+                            Icons.filter_list,
+                            color: Colors.white,
+                          ),
                         ),
                       )
                     ],
                   ),
-                ),
-                Expanded(
-                  child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.9,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 0,
+                  SizedBox(height: screenHeight * 0.02),
+                  Expanded(
+                    child: GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.9,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 0,
+                      ),
+                      itemCount: snapshot.data![0].length,
+                      itemBuilder: (context, index) {
+                        final product = snapshot.data![0][index];
+                        // widget reusable
+                        return ProductCardReusable(
+                          product: product,
+                        );
+                      },
                     ),
-                    itemCount: snapshot.data![0].length,
-                    itemBuilder: (context, index) {
-                      final product = snapshot.data![0][index];
-                      // widget reusable
-                      return ProductCardReusable(
-                        product: product,
-                      );
-                    },
-                  ),
-                )
-              ],
-            );
-          },
-        ));
+                  )
+                ],
+              );
+            },
+          )),
+    );
   }
 
   void _show(BuildContext ctx, List<String> lstcategories) {
