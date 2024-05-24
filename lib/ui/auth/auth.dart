@@ -15,9 +15,9 @@ class AuthScreen extends StatelessWidget {
         title: const Text('Auth Google'),
         actions: [
           IconButton(
-            icon: Icon(FontAwesomeIcons.doorOpen),
+            icon: const Icon(FontAwesomeIcons.doorOpen),
             onPressed: () {
-              GoogleSignInService.signInWithGoogle();
+              // GoogleSignInService.signInWithGoogle();
             },
           ),
         ],
