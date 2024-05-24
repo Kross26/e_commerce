@@ -1,4 +1,3 @@
-import 'package:e_commerce/ui/screens.dart';
 import 'package:flutter/material.dart';
 
 class CounterButton extends StatefulWidget {
@@ -12,17 +11,19 @@ class CounterButton extends StatefulWidget {
 }
 
 class _CounterButtonState extends State<CounterButton> {
+  bool agregadoAlCarrito = false;
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton.extended(
       onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const CartView()),
-        );
+        setState(() {
+          // cambiar el estado al presionar el botón
+        });
       },
-      label: const Text('add to cart'),
-      icon: const Icon(Icons.add),
+      label: Text(agregadoAlCarrito
+          ? 'Already added'
+          : 'add to cart'), // cambia a ya agregado
+      icon: Icon(agregadoAlCarrito ? Icons.done : Icons.add), // cambia el icono
     );
   }
 }
