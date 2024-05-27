@@ -30,6 +30,7 @@ class _HomeViewState extends State<HomeView> {
       child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
+            elevation: 4,
             toolbarHeight: screenHeight * 0.1,
             backgroundColor: Colors.white,
             title: const Center(

@@ -84,8 +84,6 @@
 //   }
 // }
 
-import 'dart:ui';
-
 import 'package:e_commerce/ui/screens.dart';
 import 'package:e_commerce/ui/widgets/custom_navigationbar.dart';
 import 'package:flutter/material.dart';
@@ -137,6 +135,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidht = MediaQuery.of(context).size.width;
     // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: () {
@@ -166,10 +166,11 @@ class _HomeScreenState extends State<HomeScreen> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Container(
           margin: const EdgeInsets.only(top: 10),
-          height: 64,
-          width: 64,
+          height: screenHeight * 0.058,
+          width: screenWidht * 0.12,
           child: FloatingActionButton(
-            backgroundColor: Colors.blue[500],
+            splashColor: Colors.grey[900],
+            backgroundColor: Colors.black,
             elevation: 0,
             onPressed: () {
               Navigator.of(context).push(
