@@ -1,5 +1,7 @@
+export 'package:e_commerce/ui/views/favorite_view.dart';
+export 'package:e_commerce/ui/views/support_view.dart';
+export 'package:e_commerce/ui/auth/auth.dart';
 export 'package:e_commerce/ui/widgets/counter_button_cart.dart';
-
 export 'package:e_commerce/services/api_helper.dart';
 export 'package:e_commerce/ui/widgets/product_card_widget.dart';
 export 'package:e_commerce/domain/entities/product_detail.dart';

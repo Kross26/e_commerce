@@ -12,6 +12,9 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // go router
     return MaterialApp.router(
+      theme: ThemeData(
+        useMaterial3: true,
+      ),
       title: 'E-Commerce',
       routerConfig: appRouter,
       debugShowCheckedModeBanner: false,

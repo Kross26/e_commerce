@@ -1,9 +1,8 @@
-import 'package:e_commerce/ui/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AuthScreen extends StatelessWidget {
-  static const String name = 'auth_screen';
+  // static const String name = 'auth_screen';
   const AuthScreen({super.key});
 
   @override

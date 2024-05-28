@@ -115,14 +115,12 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       NavModel(
         titlebar: const Text('Support'),
-        page: const TabPage(tab: 2),
-        // page: SupportView(),
+        page: const SupportView(),
         navKey: supportNavKey,
       ),
       NavModel(
         titlebar: const Text('Favorite'),
-        page: const TabPage(tab: 3),
-        // page: FavoriteView(),
+        page: const FavoriteView(),
         navKey: favoriteNavKey,
       ),
       NavModel(

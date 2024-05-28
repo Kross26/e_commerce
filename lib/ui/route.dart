@@ -22,4 +22,9 @@ final appRouter = GoRouter(routes: [
     // name: HomeView.name,
     builder: (context, state) => const HomeView(),
   ),
+  GoRoute(
+    path: '/auth_screen',
+    // name: HomeView.name,
+    builder: (context, state) => const AuthScreen(),
+  ),
 ]);
