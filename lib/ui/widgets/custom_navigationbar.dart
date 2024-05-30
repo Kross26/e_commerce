@@ -16,105 +16,77 @@ class NavBar extends StatelessWidget {
     // double screenHeight = MediaQuery.of(context).size.height;
     // double screenWidht = MediaQuery.of(context).size.width;
     return BottomAppBar(
-      color: Colors.grey,
-      shadowColor: Colors.black,
+      color: Colors.red,
+      // shadowColor: Colors.black,
       shape: shape,
-      surfaceTintColor: Colors.red,
+      // surfaceTintColor: Colors.grey,
       padding: const EdgeInsets.all(0),
       clipBehavior: Clip.hardEdge,
-      child: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home_filled,
-              color: Colors.black,
-            ),
-            label: 'Home',
+      elevation: 0.0,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Row(
+            children: [
+              navItem(
+                Icons.home_outlined,
+                pageIndex == 0,
+                onTap: () => onTap(0),
+              ),
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.chat,
-              color: Colors.black,
-            ),
-            label: 'Support',
+          Row(
+            children: [
+              navItem(
+                Icons.message_outlined,
+                pageIndex == 1,
+                onTap: () => onTap(1),
+              ),
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.favorite_border_outlined,
-              color: Colors.black,
-            ),
-            label: 'Favorite',
+          Row(
+            children: [
+              navItem(
+                Icons.favorite_border_outlined,
+                pageIndex == 2,
+                onTap: () => onTap(2),
+              ),
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person_outline,
-              color: Colors.black,
-            ),
-            label: 'Account',
+          Row(
+            children: [
+              navItem(
+                Icons.person_2_outlined,
+                pageIndex == 3,
+                onTap: () => onTap(3),
+              ),
+            ],
           ),
         ],
       ),
-      // elevation: 0.0,
-      // child: Row(
-      //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-      //   children: [
-      //     Row(
-      //       children: [
-      //         navItem(
-      //           Icons.home_outlined,
-      //           pageIndex == 0,
-      //           onTap: () => onTap(0),
-      //         ),
-      //       ],
-      //     ),
-      //     Row(
-      //       children: [
-      //         navItem(
-      //           Icons.message_outlined,
-      //           pageIndex == 1,
-      //           onTap: () => onTap(1),
-      //         ),
-      //       ],
-      //     ),
-      //     Row(
-      //       children: [
-      //         navItem(
-      //           Icons.favorite_border_outlined,
-      //           pageIndex == 2,
-      //           onTap: () => onTap(2),
-      //         ),
-      //       ],
-      //     ),
-      //     Row(
-      //       children: [
-      //         navItem(
-      //           Icons.person_2_outlined,
-      //           pageIndex == 3,
-      //           onTap: () => onTap(3),
-      //         ),
-      //       ],
-      //     ),
-      //   ],
-      // ),
     );
   }
 }
 
 Widget navItem(IconData icon, bool selected, {Function()? onTap}) {
-  return InkWell(
-    // highlightColor: Colors.black,
-    hoverColor: Colors.grey,
-    focusColor: Colors.blue,
-    splashColor: Colors.grey,
-    borderRadius: BorderRadius.circular(20),
-    onTap: onTap,
-    // responsive design
-    child: SizedBox.fromSize(
-      size: const Size.fromRadius(12),
-      child: FittedBox(
-        child: Icon(
-          icon,
-          color: selected ? Colors.black : Colors.white,
+  return Container(
+    width: 50,
+    decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(20))),
+    child: InkWell(
+      hoverColor: Colors.grey,
+      focusColor: Colors.blue,
+      splashColor: Colors.grey,
+      borderRadius: BorderRadius.circular(20),
+      onTap: onTap,
+      // responsive design
+      child: SizedBox.fromSize(
+        size: const Size.fromRadius(12),
+        child: FittedBox(
+          child: Icon(
+            icon,
+            color: selected ? Colors.black : Colors.grey,
+          ),
         ),
       ),
     ),

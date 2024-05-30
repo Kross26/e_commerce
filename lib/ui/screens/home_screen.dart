@@ -1,89 +1,3 @@
-// import 'package:flutter/material.dart';
-// import '../screens.dart';
-
-// class HomeScreen extends StatefulWidget {
-//   static const String name =
-//       'home_screen'; // const para usarla llamandola con gorouter
-
-//   const HomeScreen({super.key});
-
-//   @override
-//   State<HomeScreen> createState() => _HomeScreenState();
-// }
-
-// // private class
-// class _HomeScreenState extends State<HomeScreen> {
-//   // indice actual, que se muestra en el navbar
-//   int currentIndex = 0;
-//   // lista de strings, que se muestran en el titulo de las diferentes views
-//   List<String> pageNames = ['Home', 'My Cart', 'Profile'];
-
-// // consts defined
-//   @override
-//   Widget build(BuildContext context) {
-//     final screens = [
-//       const HomeView(),
-//       const CartView(),
-//       const ProfileView(),
-//     ];
-
-//     return Scaffold(
-//       appBar: AppBar(
-//           elevation: 0,
-//           backgroundColor: Colors.white,
-//           title: Center(
-//             child: Text(
-//               pageNames[currentIndex],
-//             ),
-//           ),
-//           surfaceTintColor: Colors.transparent),
-//       body: IndexedStack(
-//         index: currentIndex,
-//         children: screens,
-//       ),
-//       extendBody: true,
-//       // nav bar with 3 seccions
-//       bottomNavigationBar: Container(
-//         clipBehavior: Clip.hardEdge,
-//         decoration: const BoxDecoration(
-//             borderRadius: BorderRadius.only(
-//               topRight: Radius.circular(60),
-//               topLeft: Radius.circular(60),
-//             ),
-//             boxShadow: [
-//               // BoxShadow(color: Colors.white, spreadRadius: 0, blurRadius: 5)
-//             ]),
-//         child: ClipRRect(
-//           borderRadius: const BorderRadius.only(
-//             topLeft: Radius.circular(60.0),
-//             topRight: Radius.circular(60.0),
-//           ),
-//           child: NavigationBar(
-//             destinations: const [
-//               NavigationDestination(
-//                   icon: Icon(Icons.home_outlined), label: 'Home'),
-//               NavigationDestination(
-//                   icon: Icon(Icons.shopping_cart_outlined), label: 'Cart'),
-//               NavigationDestination(
-//                   icon: Icon(Icons.person_outline), label: 'Profile'),
-//             ],
-//             indicatorColor: Colors.white,
-//             backgroundColor: Colors.white,
-//             // elevation: 0,
-//             selectedIndex: currentIndex,
-//             // se llama cuando se seleciona una nueva pagina y actualiza "currentIndex" mostrando el titulo correspondiente
-//             onDestinationSelected: (int index) {
-//               setState(() {
-//                 currentIndex = index;
-//               });
-//             },
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 import 'package:e_commerce/ui/screens.dart';
 import 'package:e_commerce/ui/widgets/custom_navigationbar.dart';
 import 'package:flutter/material.dart';
@@ -115,12 +29,14 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       NavModel(
         titlebar: const Text('Support'),
-        page: const SupportView(),
+        page: const TabPage(tab: 2),
+        // page: SupportView(),
         navKey: supportNavKey,
       ),
       NavModel(
         titlebar: const Text('Favorite'),
-        page: const FavoriteView(),
+        page: const TabPage(tab: 3),
+        // page: FavoriteView(),
         navKey: favoriteNavKey,
       ),
       NavModel(
@@ -184,6 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
+        extendBody: true,
         bottomNavigationBar: NavBar(
           pageIndex: selectedTab,
           onTap: (index) {

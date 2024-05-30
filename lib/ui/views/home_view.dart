@@ -2,7 +2,6 @@ import 'package:e_commerce/ui/screens.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
-  static const String name = 'home_view'; //
   const HomeView({super.key});
 
   @override
@@ -30,7 +29,8 @@ class _HomeViewState extends State<HomeView> {
       child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-            elevation: 4,
+            scrolledUnderElevation: 0.0,
+            elevation: 0.0,
             toolbarHeight: screenHeight * 0.1,
             backgroundColor: Colors.white,
             title: const Center(
