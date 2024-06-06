@@ -11,6 +11,7 @@ class ProductDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidht = MediaQuery.of(context).size.width;
     return Scaffold(
+      // boton
       floatingActionButton: CounterButton(
         icon: Icons.add,
         onPressed: () {},
@@ -26,7 +27,8 @@ class ProductDetailScreen extends StatelessWidget {
                 const BackButton(),
                 IconButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, CartView.name);
+                    Navigator.pushNamed(
+                        context, CartView.name); // navegacion a otra pantalla
                   },
                   icon: const Icon(Icons.shopping_bag_outlined),
                 ),
