@@ -5,6 +5,12 @@ class FavoriteView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: const Center(child: Text('Favorite')),
+      ),
+      body: const Placeholder(),
+    );
   }
 }

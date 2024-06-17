@@ -131,17 +131,3 @@ class TabPage extends StatelessWidget {
     );
   }
 }
-
-// class Page extends StatelessWidget {
-//   final int tab;
-
-//   const Page({super.key, required this.tab});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         // appBar: AppBar(title: Text('$tab')),
-//         // body: Page(tab: tab),
-//         );
-//   }
-// }

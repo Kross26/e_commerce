@@ -8,6 +8,10 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: const Center(child: Text('Profile')),
+        ),
         body: Padding(
           padding: const EdgeInsets.only(top: 30),
           child: Center(

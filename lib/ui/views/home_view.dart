@@ -31,7 +31,7 @@ class _HomeViewState extends State<HomeView> {
           appBar: AppBar(
             scrolledUnderElevation: 0.0,
             elevation: 0.0,
-            toolbarHeight: screenHeight * 0.1,
+            // toolbarHeight: screenHeight * 0.1,
             backgroundColor: Colors.white,
             title: const Center(
               child: Text('Home'),

@@ -21,18 +21,21 @@ class ProductDetailScreen extends StatelessWidget {
         bottom: false,
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const BackButton(),
-                IconButton(
-                  onPressed: () {
-                    Navigator.pushNamed(
-                        context, CartView.name); // navegacion a otra pantalla
-                  },
-                  icon: const Icon(Icons.shopping_bag_outlined),
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const BackButton(),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pushNamed(
+                          context, CartView.name); // navegacion a otra pantalla
+                    },
+                    icon: const Icon(Icons.shopping_bag_outlined),
+                  ),
+                ],
+              ),
             ),
             // cachednetworkimage package
             Expanded(

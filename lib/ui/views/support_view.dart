@@ -5,6 +5,12 @@ class SupportView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: const Center(child: Text('Support')),
+      ),
+      body: const Placeholder(),
+    );
   }
 }
