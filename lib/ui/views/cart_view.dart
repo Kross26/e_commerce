@@ -9,7 +9,10 @@ class CartView extends StatelessWidget {
     // double screenWidht = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        toolbarHeight: 75,
+        backgroundColor: Colors.green,
+        title: const Text('Cart'),
+        centerTitle: true,
       ),
       body: const Placeholder(),
     );

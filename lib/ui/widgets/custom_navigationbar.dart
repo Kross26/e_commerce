@@ -68,14 +68,14 @@ class NavBar extends StatelessWidget {
 
 Widget navItem(IconData icon, bool selected, {Function()? onTap}) {
   return Container(
-    width: 50,
+    width: 70,
     decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(20))),
     child: InkWell(
       // hoverColor: Colors.grey,
       focusColor: Colors.blue,
       splashColor: Colors.grey,
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: BorderRadius.circular(90),
       onTap: onTap,
       // responsive design
       child: SizedBox.fromSize(

@@ -39,12 +39,16 @@ class ProductDetailScreen extends StatelessWidget {
             ),
             // cachednetworkimage package
             Expanded(
-              child: CachedNetworkImage(
-                width: screenWidht * 0.9,
-                imageUrl: product.image,
-                progressIndicatorBuilder: (context, url, downloadProgress) =>
-                    CircularProgressIndicator(value: downloadProgress.progress),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CachedNetworkImage(
+                  width: screenWidht * 0.9,
+                  imageUrl: product.image,
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      CircularProgressIndicator(
+                          value: downloadProgress.progress),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                ),
               ),
             ),
             Container(
@@ -70,12 +74,25 @@ class ProductDetailScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 3),
-                    Text(
-                      "\$${product.price}",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: screenWidht * 0.03,
-                      ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          "\$${product.price}",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: screenWidht * 0.03,
+                          ),
+                        ),
+                        const Row(
+                          children: [
+                            Icon(
+                              Icons.favorite_border_outlined,
+                            )
+                          ],
+                        )
+                      ],
                     ),
                     const SizedBox(height: 3),
                     Text(

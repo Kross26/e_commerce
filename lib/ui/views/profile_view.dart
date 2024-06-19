@@ -9,7 +9,8 @@ class ProfileView extends StatelessWidget {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          toolbarHeight: 75,
+          backgroundColor: Colors.green,
           title: const Center(child: Text('Profile')),
         ),
         body: Padding(
@@ -23,6 +24,7 @@ class ProfileView extends StatelessWidget {
                   ),
                   child: const CircleAvatar(
                     radius: 60,
+                    // imagen profile
                     backgroundImage: NetworkImage(
                         'https://static-00.iconduck.com/assets.00/profile-circle-icon-2048x2048-cqe5466q.png'),
                   ),

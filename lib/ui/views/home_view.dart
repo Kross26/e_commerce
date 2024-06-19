@@ -24,113 +24,116 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidht = MediaQuery.of(context).size.width;
-    return Padding(
-      padding: const EdgeInsets.all(13.0),
-      child: Scaffold(
-          backgroundColor: Colors.white,
-          appBar: AppBar(
-            scrolledUnderElevation: 0.0,
-            elevation: 0.0,
-            // toolbarHeight: screenHeight * 0.1,
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(13.0),
+        child: Scaffold(
             backgroundColor: Colors.white,
-            title: const Center(
-              child: Text('Home'),
+            appBar: AppBar(
+              toolbarHeight: 60,
+              scrolledUnderElevation: 0.0,
+              elevation: 0.0,
+              // toolbarHeight: screenHeight * 0.1,
+              backgroundColor: Colors.white,
+              title: const Center(
+                child: Text('Home'),
+              ),
+              leading: const Icon(Icons.widgets_outlined),
+              actions: [
+                SizedBox(
+                    width: screenWidht * 0.12,
+                    child: const Icon(
+                      Icons.notifications_outlined,
+                    )),
+              ],
             ),
-            leading: const Icon(Icons.widgets_outlined),
-            actions: [
-              SizedBox(
-                  width: screenWidht * 0.12,
-                  child: const Icon(
-                    Icons.notifications_outlined,
-                  )),
-            ],
-          ),
-          body: FutureBuilder<List>(
-            future: Future.wait([_productFuture, _futureCategory]),
-            builder: (context, snapshot) {
-              // connect to the internet
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              if (snapshot.data == null) {
-                return const Center(
-                  child: Text("No Data"),
-                );
-              }
+            body: FutureBuilder<List>(
+              future: Future.wait([_productFuture, _futureCategory]),
+              builder: (context, snapshot) {
+                // connect to the internet
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                if (snapshot.data == null) {
+                  return const Center(
+                    child: Text("No Data"),
+                  );
+                }
 
-              if (snapshot.data!.isEmpty) {
-                return const Center(
-                  child: Text("Data Empty"),
-                );
-              }
-              return Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                // borderSide: BorderSide(width: 30),
-                              ),
-                              filled: true,
-                              hintText: "Seach product",
-                              fillColor: Colors.white,
-                              hintStyle: TextStyle(
-                                color: Colors.grey[500],
-                              ),
-                              prefixIcon: Icon(
-                                Icons.search,
-                                color: Colors.grey[500],
-                              )),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      GestureDetector(
-                        onTap: () => _show(context, snapshot.data![1]),
-                        child: Container(
-                          height: 50,
-                          width: 50,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.black),
-                          child: const Icon(
-                            Icons.filter_list,
-                            color: Colors.white,
+                if (snapshot.data!.isEmpty) {
+                  return const Center(
+                    child: Text("Data Empty"),
+                  );
+                }
+                return Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  // borderSide: BorderSide(width: 30),
+                                ),
+                                filled: true,
+                                hintText: "Seach product",
+                                fillColor: Colors.white,
+                                hintStyle: TextStyle(
+                                  color: Colors.grey[500],
+                                ),
+                                prefixIcon: Icon(
+                                  Icons.search,
+                                  color: Colors.grey[500],
+                                )),
                           ),
                         ),
-                      )
-                    ],
-                  ),
-                  SizedBox(height: screenHeight * 0.02),
-                  Expanded(
-                    child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 0.9,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 0,
-                      ),
-                      itemCount: snapshot.data![0].length,
-                      itemBuilder: (context, index) {
-                        final product = snapshot.data![0][index];
-                        // widget reusable
-                        return ProductCardReusable(
-                          product: product,
-                        );
-                      },
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        GestureDetector(
+                          onTap: () => _show(context, snapshot.data![1]),
+                          child: Container(
+                            height: 50,
+                            width: 50,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: Colors.black),
+                            child: const Icon(
+                              Icons.filter_list,
+                              color: Colors.white,
+                            ),
+                          ),
+                        )
+                      ],
                     ),
-                  )
-                ],
-              );
-            },
-          )),
+                    SizedBox(height: screenHeight * 0.02),
+                    Expanded(
+                      child: GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 0.8,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 0,
+                        ),
+                        itemCount: snapshot.data![0].length,
+                        itemBuilder: (context, index) {
+                          final product = snapshot.data![0][index];
+                          // widget reusable
+                          return ProductCardReusable(
+                            product: product,
+                          );
+                        },
+                      ),
+                    )
+                  ],
+                );
+              },
+            )),
+      ),
     );
   }
 

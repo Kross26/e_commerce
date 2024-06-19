@@ -7,7 +7,8 @@ class SupportView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        toolbarHeight: 75,
+        backgroundColor: Colors.green,
         title: const Center(child: Text('Support')),
       ),
       body: const Placeholder(),
