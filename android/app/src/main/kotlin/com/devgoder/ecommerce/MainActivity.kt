@@ -1,4 +1,4 @@
-package com.diegorios.ecommerceauthapp
+package com.devgoder.ecommerce-commerce
 
 import io.flutter.embedding.android.FlutterActivity
 
