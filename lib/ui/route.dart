@@ -8,14 +8,14 @@ final appRouter = GoRouter(routes: [
     builder: (context, state) => const HomeScreen(),
   ),
   GoRoute(
-    path: '/cart_view',
+    path: '/cart_screen',
     // name: CartView.name,
-    builder: (context, state) => const CartView(),
+    builder: (context, state) => const CartScreen(),
   ),
   GoRoute(
-    path: '/profile_view',
+    path: '/profile_screen',
     // name: ProfileView.name,
-    builder: (context, state) => const ProfileView(),
+    builder: (context, state) => const ProfileScreen(),
   ),
   GoRoute(
     path: '/home_view',

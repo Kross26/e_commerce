@@ -1,6 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:e_commerce/ui/screens.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import '../../domain/blocs/bloc_cart/cart_bloc.dart';
+import '../screens.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   const ProductDetailScreen({super.key, required this.product});
@@ -9,60 +14,69 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidht = MediaQuery.of(context).size.width;
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeith = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      // boton
-      floatingActionButton: CounterButton(
-        icon: Icons.add,
-        onPressed: () {},
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () => context.go('/cart'),
+      //   child: BlocBuilder<CartBloc, CartState>(
+      //     builder: (context, state) {
+      //       return Badge(
+      //         value: state.products.length.toString(),
+      //         child: const Icon(Icons.shopping_cart),
+      //       );
+      //     },
+      //   ),
+      // ),
+      // extendBodyBehindAppBar: true,
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        scrolledUnderElevation: 0.0,
+        elevation: 0,
+        toolbarHeight: 75,
+        backgroundColor: Colors.white,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.ios_share_outlined),
+          ),
+        ],
+      ),
       body: SafeArea(
         bottom: false,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const BackButton(),
-                  IconButton(
-                    onPressed: () {
-                      Navigator.pushNamed(
-                          context, CartView.name); // navegacion a otra pantalla
-                    },
-                    icon: const Icon(Icons.shopping_bag_outlined),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                width: screenWidth * 0.8,
+                height: screenHeith * 0.4,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CachedNetworkImage(
+                    width: screenWidth * 0.9,
+                    imageUrl: product.image,
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) =>
+                            CircularProgressIndicator(
+                                value: downloadProgress.progress),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
-                ],
-              ),
-            ),
-            // cachednetworkimage package
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: CachedNetworkImage(
-                  width: screenWidht * 0.9,
-                  imageUrl: product.image,
-                  progressIndicatorBuilder: (context, url, downloadProgress) =>
-                      CircularProgressIndicator(
-                          value: downloadProgress.progress),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(20),
-              height: MediaQuery.of(context).size.height * 0.5,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(40),
-                  topRight: Radius.circular(40),
+              Container(
+                margin: const EdgeInsets.only(bottom: 50),
+                padding: const EdgeInsets.all(20),
+                height: MediaQuery.of(context).size.height * 0.5,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(40),
+                    topRight: Radius.circular(40),
+                  ),
+                  color: Colors.grey.shade300,
                 ),
-                color: Colors.grey.shade300,
-              ),
-              child: SingleChildScrollView(
                 child: Column(
                   children: [
                     Text(
@@ -70,7 +84,7 @@ class ProductDetailScreen extends StatelessWidget {
                       maxLines: 2,
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
-                        fontSize: screenWidht * 0.04,
+                        fontSize: screenWidth * 0.05,
                       ),
                     ),
                     const SizedBox(height: 3),
@@ -78,37 +92,89 @@ class ProductDetailScreen extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text(
-                          "\$${product.price}",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: screenWidht * 0.03,
+                        Padding(
+                          padding: const EdgeInsets.only(right: 20),
+                          child: Text(
+                            "\$${product.price}",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: screenWidth * 0.04,
+                            ),
                           ),
                         ),
-                        const Row(
+                        Row(
                           children: [
-                            Icon(
-                              Icons.favorite_border_outlined,
+                            IconButton(
+                              onPressed: () {},
+                              icon: const Icon(Icons.favorite_border_outlined),
                             )
                           ],
-                        )
+                        ),
                       ],
                     ),
                     const SizedBox(height: 3),
-                    Text(
-                      product.description,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: screenWidht * 0.032,
+                    // TODO
+                    // btn que añade productos al carrito
+                    ButtonCartWidget(
+                      label: 'add',
+                      icon: Icons.add,
+                      onPressed: () {
+                        context.read<CartBloc>().add(AddProductToCart(product));
+                      },
+                    ),
+                    Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Text(
+                          product.description,
+                          maxLines: 8,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: screenWidth * 0.032,
+                          ),
+                        ),
                       ),
                     ),
                   ],
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
+// numero de productos dentro del carrito que se muestra en icon
+// class Badge extends StatelessWidget {
+//   final String value;
+//   final Widget child;
+
+//   const Badge({super.key, required this.value, required this.child});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Stack(
+//       alignment: Alignment.center,
+//       children: [
+//         child,
+//         Positioned(
+//           right: 0,
+//           child: CircleAvatar(
+//             radius: 0,
+//             backgroundColor: Colors.red,
+//             child: Text(
+//               value,
+//               style: const TextStyle(fontSize: 12, color: Colors.white),
+//             ),
+//           ),
+//         )
+//       ],
+//     );
+//   }
+// }

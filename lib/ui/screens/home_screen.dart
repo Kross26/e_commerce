@@ -1,6 +1,8 @@
 import 'package:e_commerce/ui/screens.dart';
 import 'package:e_commerce/ui/widgets/custom_navigationbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../domain/blocs/bloc_cart/cart_bloc.dart';
 import '../widgets/nav_model.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -39,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       NavModel(
         titlebar: const Text('Profile'),
-        page: const ProfileView(),
+        page: const ProfileScreen(),
         navKey: profileNavKey,
       ),
     ];
@@ -60,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
         }
       },
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey.shade300,
         body: IndexedStack(
           index: selectedTab,
           children: items
@@ -76,25 +78,35 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         // buttom cart middle
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        // btn carrito
+        // todo
         floatingActionButton: Container(
           margin: const EdgeInsets.only(top: 10),
           height: screenHeight * 0.058,
           width: screenWidht * 0.12,
           child: FloatingActionButton(
+            heroTag: "btn1",
             splashColor: Colors.grey[900],
             backgroundColor: Colors.black,
             elevation: 0,
             onPressed: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => (const CartView())));
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => (const CartScreen())));
             },
             shape: RoundedRectangleBorder(
               side: const BorderSide(width: 3, color: Colors.white),
               borderRadius: BorderRadius.circular(100),
             ),
-            child: const Icon(
-              Icons.shopping_bag_outlined,
-              color: Colors.white,
+            child: BlocBuilder<CartBloc, CartState>(
+              builder: (context, state) {
+                return Badge(
+                  value: state.products.length.toString(),
+                  child: const Icon(
+                    Icons.shopping_cart,
+                    color: Colors.white,
+                  ),
+                );
+              },
             ),
           ),
         ),
@@ -128,6 +140,35 @@ class TabPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Tab $tab')),
+    );
+  }
+}
+
+// numero de productos agregados al carrito
+class Badge extends StatelessWidget {
+  final String value;
+  final Widget child;
+
+  const Badge({super.key, required this.value, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        child,
+        Positioned(
+          right: 0,
+          child: CircleAvatar(
+            radius: 0,
+            backgroundColor: Colors.red,
+            child: Text(
+              value,
+              style: const TextStyle(fontSize: 12, color: Colors.blue),
+            ),
+          ),
+        )
+      ],
     );
   }
 }

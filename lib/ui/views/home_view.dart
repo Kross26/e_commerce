@@ -24,30 +24,30 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidht = MediaQuery.of(context).size.width;
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(13.0),
-        child: Scaffold(
-            backgroundColor: Colors.white,
-            appBar: AppBar(
-              toolbarHeight: 60,
-              scrolledUnderElevation: 0.0,
-              elevation: 0.0,
-              // toolbarHeight: screenHeight * 0.1,
-              backgroundColor: Colors.white,
-              title: const Center(
-                child: Text('Home'),
-              ),
-              leading: const Icon(Icons.widgets_outlined),
-              actions: [
-                SizedBox(
-                    width: screenWidht * 0.12,
-                    child: const Icon(
-                      Icons.notifications_outlined,
-                    )),
-              ],
+    return Padding(
+      padding: const EdgeInsets.only(left: 17, right: 17),
+      child: Scaffold(
+          backgroundColor: Colors.grey.shade300,
+          appBar: AppBar(
+            toolbarHeight: 60,
+            scrolledUnderElevation: 0.0,
+            elevation: 0.0,
+            // toolbarHeight: screenHeight * 0.1,
+            backgroundColor: Colors.grey.shade300,
+            title: const Center(
+              child: Text('Home'),
             ),
-            body: FutureBuilder<List>(
+            leading: const Icon(Icons.widgets_outlined),
+            actions: [
+              SizedBox(
+                  width: screenWidht * 0.12,
+                  child: const Icon(
+                    Icons.notifications_outlined,
+                  )),
+            ],
+          ),
+          body: SafeArea(
+            child: FutureBuilder<List>(
               future: Future.wait([_productFuture, _futureCategory]),
               builder: (context, snapshot) {
                 // connect to the internet
@@ -132,8 +132,8 @@ class _HomeViewState extends State<HomeView> {
                   ],
                 );
               },
-            )),
-      ),
+            ),
+          )),
     );
   }
 

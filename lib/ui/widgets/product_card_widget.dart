@@ -59,7 +59,7 @@ class ProductCardReusable extends StatelessWidget {
                 height: 5,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     "\$${product.price}",
@@ -67,11 +67,6 @@ class ProductCardReusable extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       fontSize: screenWidht * 0.03,
                     ),
-                  ),
-                  IconButton(
-                    iconSize: screenWidht * 0.04,
-                    onPressed: () {},
-                    icon: const Icon(Icons.favorite_border_rounded),
                   ),
                 ],
               ),

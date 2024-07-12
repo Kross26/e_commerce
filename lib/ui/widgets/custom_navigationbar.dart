@@ -16,6 +16,7 @@ class NavBar extends StatelessWidget {
     // double screenHeight = MediaQuery.of(context).size.height;
     // double screenWidht = MediaQuery.of(context).size.width;
     return BottomAppBar(
+      //todo
       color: Colors.white,
       shape: shape,
       padding: const EdgeInsets.all(0),
@@ -72,9 +73,9 @@ Widget navItem(IconData icon, bool selected, {Function()? onTap}) {
     decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(20))),
     child: InkWell(
-      // hoverColor: Colors.grey,
-      focusColor: Colors.blue,
-      splashColor: Colors.grey,
+      hoverColor: Colors.grey.shade300,
+      focusColor: Colors.grey.shade300,
+      splashColor: Colors.grey.shade300,
       borderRadius: BorderRadius.circular(90),
       onTap: onTap,
       // responsive design
