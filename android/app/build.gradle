@@ -31,8 +31,8 @@ android {
     ndkVersion flutter.ndkVersion
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
@@ -67,4 +67,13 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+       implementation 'com.google.guava:guava:28.2-android'
+}
+
+// I put this block in both build.gradle and android/build.gradle... no clue what it does though...
+configurations.all {
+    resolutionStrategy {
+        force 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22'
+    }
+}
